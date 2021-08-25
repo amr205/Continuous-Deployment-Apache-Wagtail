@@ -19,4 +19,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          ${{secrets.HOST_IP}} ssh_ansible_user=azureuser
+          ${{secrets.HOST_IP}} ansible_ssh_user=azureuser
