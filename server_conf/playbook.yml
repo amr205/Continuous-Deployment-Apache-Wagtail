@@ -27,7 +27,7 @@
       name: wsgi
   
   - name: Activar sitio default
-    command: a2enssite 000-default.conf
+    command: a2ensite 000-default.conf
 
   - name: Copiar archivo del sitio
     copy:
