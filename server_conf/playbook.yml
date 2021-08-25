@@ -1,0 +1,32 @@
+---
+
+- hosts: my_server
+  become: true
+  tasks:
+
+  - name: Install software (apache2, python, mod-wsgi)
+    apt:
+      name:
+      - apache2
+      - python3
+      - libjpeg-dev
+      - libfreetype6-dev
+      - zlib1g-dev
+      - build-essential
+      - python-setuptools
+      - wget
+      - apache2-utils
+      - ssl-cert
+      - libapache2-mod-wsgi-py3
+      state: latest
+      update_cache: yes
+  
+  - name: Activar mod wsgi
+    apache2_module:
+      state: present
+      name: wsgi
+  
+  - name: Desactivar sitio default
+    command: a2dissite 000-default.conf
+  
+  
