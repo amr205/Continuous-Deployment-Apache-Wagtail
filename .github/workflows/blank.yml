@@ -1,0 +1,25 @@
+name: CI-CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  configure-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: playbook.yml
+          directory: ./server_conf/
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          inventory: |
+            [my_server]
+            ${{secrets.HOST_IP}}
+          vault_password: ${{secrets.VAULT_PASSWORD}}
