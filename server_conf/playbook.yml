@@ -36,6 +36,11 @@
       owner: www-data
       group: www-data
       mode: 0644
+  
+  - name: Reiniciar servidor
+    service:
+      name: apache2
+      state: restarted
 
   
   
