@@ -9,5 +9,19 @@
       name:
       - python3
       - apache2
+      - libjpeg-dev
+      - libfreetype6-dev
+      - zlib1g-dev
+      - libtiff-dev
+      - build-essential
+      - python-setuptools
+      - wget
+      - libapache2-mod-wsgi-py3
       state: latest
       update_cache: yes
+  - name: Activar mod de apache wsgi
+    apache2_module:
+      name: wsgi
+      state: present
+  - name: Desactivar sitio por defecto
+    command: a2dissite 000-default.conf
