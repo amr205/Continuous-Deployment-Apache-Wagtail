@@ -26,7 +26,16 @@
       state: present
       name: wsgi
   
-  - name: Desactivar sitio default
-    command: a2dissite 000-default.conf
+  - name: Activar sitio default
+    command: a2enssite 000-default.conf
+
+  - name: Copiar archivo del sitio
+    copy:
+      src: ./files/default_site.html
+      dest: /var/www/html/index.html
+      owner: www-data
+      group: www-data
+      mode: 0644
+
   
   
