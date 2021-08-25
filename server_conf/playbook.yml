@@ -1,0 +1,13 @@
+---
+
+- hosts: myservers
+  become: true
+
+  tasks:
+  - name: Instalar software y dependencias
+    apt:
+      name:
+      - python3
+      - apache2
+      state: latest
+      update_cache: yes
