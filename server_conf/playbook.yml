@@ -25,3 +25,9 @@
       state: present
   - name: Desactivar sitio por defecto
     command: a2dissite 000-default.conf
+  - name: Copiar archivo de configuracion del sitio
+    copy:
+      src: ./files/website.conf
+      dest: /etc/apache2/sites-available/website.conf
+  - name: Activar nuestro sitio de wagtail
+    command: a2ensite website.conf
