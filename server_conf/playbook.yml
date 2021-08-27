@@ -37,6 +37,10 @@
       dest: /home/azureuser/application
       owner: www-data
       group: www-data
+  - name: Instalar virtualenv via pip
+    pip:
+      name: virtualenv
+      executable: pip3
   - name: Instalar dependencias de python
     pip:
       virtualenv: /home/azureuser/application/.venv
