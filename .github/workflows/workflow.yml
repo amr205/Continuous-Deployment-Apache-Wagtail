@@ -15,6 +15,7 @@ jobs:
     - uses: hashicorp/setup-terraform@v1
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        terraform_wrapper: false
 
     - run: terraform init
       working-directory: ./infrastructure/
@@ -25,6 +26,11 @@ jobs:
     - run: terraform apply -auto-approve 
       id: terraform_apply
       working-directory: ./infrastructure/
+    
+    - name: Call terraform output
+      run: |
+        output=$(terraform output server-ip)
+        echo $output
 
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
@@ -34,4 +40,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          $(terraform output server-ip) ansible_ssh_user=azureuser
+          ${{output}} ansible_ssh_user=azureuser
