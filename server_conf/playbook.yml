@@ -1,7 +1,7 @@
 ---
 
 - hosts: myservers
-  become: true
+  
 
   tasks:
   - name: Instalar software y dependencias
@@ -20,24 +20,30 @@
       - python3-pip
       state: latest
       update_cache: yes
+    become: true
   - name: Activar mod de apache wsgi
     apache2_module:
       name: wsgi
       state: present
+    become: true
   - name: Desactivar sitio por defecto
     command: a2dissite 000-default.conf
+    become: true
   - name: Copiar archivo de configuracion del sitio
     copy:
       src: ./files/website.conf
       dest: /etc/apache2/sites-available/website.conf
+    become: true
   - name: Activar nuestro sitio de wagtail
     command: a2ensite website.conf
+    become: true
   - name: Copiar los archivos del sitio web
     copy:
       src: ./../application/
       dest: /home/azureuser/application
       owner: www-data
       group: www-data
+    become: true
   - name: Instalar virtualenv via pip
     pip:
       name: virtualenv
@@ -58,7 +64,12 @@
     shell:
       cmd: . .venv/bin/activate && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
+  - name: Recargar configuración
+    shell:
+      cmd: systemctl reload apache2
+    become: true
   - name: Reiniciar servidor
     service:
       name: apache2
       state: restarted
+    become: true
