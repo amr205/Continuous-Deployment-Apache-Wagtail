@@ -86,6 +86,6 @@ resource "azurerm_linux_virtual_machine" "wagtail-apache" {
   }
 }
 
-output "server-ip" {
+output "serverip" {
   value = azurerm_linux_virtual_machine.wagtail-apache.public_ip_address
 }

@@ -30,9 +30,9 @@ jobs:
     - name: Call terraform output
       id: tf_output
       run: |
-        output=$(terraform output server-ip)
+        output=$(terraform output serverip)
         echo "$output"
-        echo "::set-output name=server-ip::$output"
+        echo "::set-output name=serverip::$output"
       shell: bash
 
     - name: Run playbook
@@ -43,4 +43,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          ${{steps.tf_output.outputs.server-ip}} ansible_ssh_user=azureuser
+          ${{steps.tf_output.outputs.serverip}} ansible_ssh_user=azureuser
