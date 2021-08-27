@@ -11,6 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - run: terraform init
+      working-directory: ./infrastructure/
+    
+    - run: terraform plan -no-color
+      working-directory: ./infrastructure/
+    
+    - run: terraform apply -auto-approve 
+      id: terraform_apply
+      working-directory: ./infrastructure/
+
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
@@ -19,4 +34,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          ${{secrets.HOST_IP}} ansible_ssh_user=azureuser
+          $(terraform output server-ip) ansible_ssh_user=azureuser
