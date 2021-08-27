@@ -1,7 +1,8 @@
 ---
 
 - hosts: myservers
-  
+  vars:
+    ansible_python_interpreter: auto
   tasks:
   - name: Instalar software y dependencias
     apt:
