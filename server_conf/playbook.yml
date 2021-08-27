@@ -52,18 +52,26 @@
       virtualenv: /home/azureuser/application/.venv
       requirements: /home/azureuser/application/requirements.txt
       state: present
+    become: yes
+    become_user: www-data
   - name: Construir migraciones
     shell:
       cmd: . .venv/bin/activate && python3 manage.py makemigrations
       chdir: /home/azureuser/application/
+    become: yes
+    become_user: www-data
   - name: Realizar migraciones
     shell:
       cmd: . .venv/bin/activate && python3 manage.py migrate
       chdir: /home/azureuser/application/
+    become: yes
+    become_user: www-data
   - name: Obtener archivos estaticos
     shell:
       cmd: . .venv/bin/activate && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
+    become: yes
+    become_user: www-data
   - name: Recargar configuración
     shell:
       cmd: systemctl reload apache2
