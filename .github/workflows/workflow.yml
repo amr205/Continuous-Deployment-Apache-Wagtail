@@ -20,9 +20,6 @@ jobs:
     - run: terraform init
       working-directory: ./infrastructure/
     
-    - run: terraform plan -no-color
-      working-directory: ./infrastructure/
-    
     - run: terraform apply -auto-approve 
       id: terraform_apply
       working-directory: ./infrastructure/

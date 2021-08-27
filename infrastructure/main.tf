@@ -80,9 +80,9 @@ resource "azurerm_linux_virtual_machine" "wagtail-apache" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "0001-com-ubuntu-pro-focal"
-    sku       = "pro-20_04-lts"
-    version   = "20.04.20200525"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
+    version   = "latest"
   }
 }
 
