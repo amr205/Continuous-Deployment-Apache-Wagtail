@@ -48,13 +48,13 @@
       state: present
   - name: Construir migraciones
     command: python3 manage.py makemigrations
-    chdir: /home/azureuser/application/
+      chdir: /home/azureuser/application/
   - name: Realizar migraciones
     command: python3 manage.py migrate
-    chdir: /home/azureuser/application/
+      chdir: /home/azureuser/application/
   - name: Obtener archivos estaticos
     command: python3 manage.py collecstatic
-    chdir: /home/azureuser/application/
+      chdir: /home/azureuser/application/
   - name: Reiniciar servidor
     service:
       name: apache2
