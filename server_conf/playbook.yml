@@ -56,20 +56,14 @@
     shell:
       cmd: . /home/azureuser/applicationvenv && python3 manage.py makemigrations
       chdir: /home/azureuser/application/
-    become: yes
-    become_user: www-data
   - name: Realizar migraciones
     shell:
       cmd: . /home/azureuser/applicationvenv && python3 manage.py migrate
       chdir: /home/azureuser/application/
-    become: yes
-    become_user: www-data
   - name: Obtener archivos estaticos
     shell:
       cmd: . /home/azureuser/applicationvenv && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
-    become: yes
-    become_user: www-data
   - name: Recargar configuración
     shell:
       cmd: systemctl reload apache2
