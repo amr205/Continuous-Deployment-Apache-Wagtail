@@ -41,4 +41,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          ${{steps.tf_output.server_ip}} ansible_ssh_user=azureuser
+          ${{steps.tf_output.outputs.server_ip}} ansible_ssh_user=azureuser
