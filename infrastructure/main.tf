@@ -81,7 +81,7 @@ resource "azurerm_linux_virtual_machine" "wagtail-apache" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "20.04-LTS"
+    sku       = "20.04-LTS-gen1"
     version   = "latest"
   }
 }
