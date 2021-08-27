@@ -54,15 +54,15 @@
       state: present
   - name: Construir migraciones
     shell:
-      cmd: . /home/azureuser/applicationvenv && python3 manage.py makemigrations
+      cmd: . /home/azureuser/applicationvenv/bin/activate && python3 manage.py makemigrations
       chdir: /home/azureuser/application/
   - name: Realizar migraciones
     shell:
-      cmd: . /home/azureuser/applicationvenv && python3 manage.py migrate
+      cmd: . /home/azureuser/applicationvenv/bin/activate && python3 manage.py migrate
       chdir: /home/azureuser/application/
   - name: Obtener archivos estaticos
     shell:
-      cmd: . /home/azureuser/applicationvenv && python3 manage.py collectstatic
+      cmd: . /home/azureuser/applicationvenv/bin/activate && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
   - name: Recargar configuración
     shell:
