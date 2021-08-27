@@ -26,12 +26,6 @@ jobs:
     - run: terraform apply -auto-approve 
       id: terraform_apply
       working-directory: ./infrastructure/
-    
-    - name: Call terraform output
-      id: tf_output
-      run: |
-        output=$(terraform output server-ip)
-        echo "::set-output name=server_ip::$(output)"
 
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
@@ -41,4 +35,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          ${{steps.tf_output.outputs.server_ip}} ansible_ssh_user=azureuser
+          ${{terraform output server-ip}} ansible_ssh_user=azureuser
