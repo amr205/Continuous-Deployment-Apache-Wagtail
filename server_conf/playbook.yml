@@ -2,7 +2,6 @@
 
 - hosts: myservers
   
-
   tasks:
   - name: Instalar software y dependencias
     apt:
