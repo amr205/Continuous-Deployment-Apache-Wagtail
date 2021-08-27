@@ -60,11 +60,11 @@
     shell:
       cmd: . /home/azureuser/applicationvenv/bin/activate && python3 manage.py migrate
       chdir: /home/azureuser/application/
-    become: true
   - name: Obtener archivos estaticos
     shell:
       cmd: . /home/azureuser/applicationvenv/bin/activate && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
+    become: true
   - name: Recargar configuración
     shell:
       cmd: systemctl reload apache2
