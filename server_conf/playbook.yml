@@ -79,6 +79,11 @@
       cmd: mv static/css/* myWebApp/static/css/
       chdir: /home/azureuser/application/
     become: true
+  - name: Eliminar folder static
+    shell:
+      cmd: rm -r static/
+      chdir: /home/azureuser/application/
+    become: true
   - name: Cambiar usuario/grupo dueños de archivos estaticos
     shell:
       cmd: chown -R www-data:www-data myWebApp/static/
