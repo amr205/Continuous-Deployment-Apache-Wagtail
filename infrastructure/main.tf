@@ -62,7 +62,7 @@ resource "azurerm_linux_virtual_machine" "wagtail-apache" {
   name                = "wagtail-apache-machine"
   resource_group_name = azurerm_resource_group.wagtail-apache.name
   location            = azurerm_resource_group.wagtail-apache.location
-  size                = "Standard_B1"
+  size                = "Standard_B1s"
   admin_username      = "azureuser"
   network_interface_ids = [
     azurerm_network_interface.wagtail-apache.id,
