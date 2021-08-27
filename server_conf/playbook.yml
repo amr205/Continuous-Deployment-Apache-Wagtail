@@ -56,7 +56,7 @@
       chdir: /home/azureuser/application/
   - name: Obtener archivos estaticos
     shell:
-      cmd: . .venv/bin/activate && python3 manage.py collecstatic
+      cmd: . .venv/bin/activate && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
   - name: Reiniciar servidor
     service:
