@@ -47,14 +47,11 @@
       requirements: /home/azureuser/application/requirements.txt
       state: present
   - name: Construir migraciones
-    command: python3 manage.py makemigrations
-      chdir: /home/azureuser/application/
+    command: python3 /home/azureuser/application/manage.py makemigrations
   - name: Realizar migraciones
-    command: python3 manage.py migrate
-      chdir: /home/azureuser/application/
+    command: python3 /home/azureuser/application/manage.py migrate
   - name: Obtener archivos estaticos
-    command: python3 manage.py collecstatic
-      chdir: /home/azureuser/application/
+    command: python3 /home/azureuser/application/manage.py collecstatic
   - name: Reiniciar servidor
     service:
       name: apache2
