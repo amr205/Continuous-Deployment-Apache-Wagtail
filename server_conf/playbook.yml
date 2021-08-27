@@ -65,7 +65,17 @@
       cmd: . /home/azureuser/applicationvenv/bin/activate && python3 manage.py collectstatic
       chdir: /home/azureuser/application/
     become: true
-  - name: Mover archivos estaticos
+  - name: Mover archivos estaticos css
+    shell:
+      cmd: mv static/* myWebApp/static/
+      chdir: /home/azureuser/application/
+    become: true
+  - name: Mover archivos estaticos js
+    shell:
+      cmd: mv static/js/* myWebApp/static/js/
+      chdir: /home/azureuser/application/
+    become: true
+  - name: Mover archivos estaticos css
     shell:
       cmd: mv static/css/* myWebApp/static/css/
       chdir: /home/azureuser/application/
