@@ -31,3 +31,24 @@
       dest: /etc/apache2/sites-available/website.conf
   - name: Activar nuestro sitio de wagtail
     command: a2ensite website.conf
+  - name: Copiar los archivos del sitio web
+    copy:
+      src: ./../application/
+      dest: /home/azureuser/application
+      owner: www-data
+      group: www-data
+  - name: Instalar dependencias de python
+    pip:
+      virtualenv: /home/azureuser/application/.venv
+      requirements: /home/azureuser/application/requirements.txt
+      state: present
+  - name: Construir migraciones
+    command: python3 manage.py makemigrations
+  - name: Realizar migraciones
+    command: python3 manage.py migrate
+  - name: Obtener archivos estaticos
+    command: python3 manage.py collecstatic
+  - name: Reiniciar servidor
+    service:
+      name: apache2
+      state: restarted
