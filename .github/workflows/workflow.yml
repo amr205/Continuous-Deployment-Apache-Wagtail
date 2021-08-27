@@ -29,6 +29,7 @@ jobs:
     
     - name: Call terraform output
       id: tf_output
+      working-directory: ./infrastructure/
       run: |
         output=$(terraform output serverip)
         echo "$output"
