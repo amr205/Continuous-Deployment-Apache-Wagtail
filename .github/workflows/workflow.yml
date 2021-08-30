@@ -16,22 +16,20 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
         terraform_wrapper: false
-
+    
     - run: terraform init
       working-directory: ./infrastructure/
-    
-    - run: terraform apply -auto-approve 
-      id: terraform_apply
+
+    - run: terraform apply -auto-approve
       working-directory: ./infrastructure/
     
-    - name: Call terraform output
+    - name: Call the output
       id: tf_output
       working-directory: ./infrastructure/
       run: |
-        output=$(terraform output serverip)
-        echo "$output"
-        echo "::set-output name=serverip::$output"
-      shell: bash
+        output=$(terraform output server_ip)
+        echo $output
+        echo "::set-output name=server_ip::$output"
 
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
@@ -41,4 +39,4 @@ jobs:
         key: ${{secrets.SSH_PRIVATE_KEY}}
         inventory: |
           [myservers]
-          ${{steps.tf_output.outputs.serverip}} ansible_ssh_user=azureuser
+          ${{steps.tf_output.outputs.server_ip}} ansible_ssh_user=azureuser
