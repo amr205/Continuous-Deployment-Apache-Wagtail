@@ -26,7 +26,7 @@ jobs:
     - run: terraform init
       working-directory: ./infrastructure/
 
-    - run: terraform apply -auto-approve -var 'vm_ssh_key=${{secrets.SSH_PRIVATE_KEY}}'
+    - run: terraform apply -auto-approve
       working-directory: ./infrastructure/
     
     - name: Call the output
