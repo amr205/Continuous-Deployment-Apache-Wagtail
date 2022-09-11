@@ -19,7 +19,9 @@ provider "azurerm" {
   features {}
 }
 
-
+variable "vm_ssh_key" {
+  type = string
+}
 
 resource "azurerm_resource_group" "wagtail-apache" {
   name     = "wagtail-apache-resources"
@@ -102,7 +104,7 @@ resource "azurerm_linux_virtual_machine" "wagtail-apache" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCyQNwh6kZEG2VTp35+C5J6/RDv2rS9dqNcAKvi6ab7ys4nfeUs+aelIHv6iXW49CJIF7ThmRgxJbVSqTaHKKfZV5B1yrzosEDeqlWmIp9b3tixYoOWpRpNZJmShwnxcTQMz8V4SAw2aRq6VaC7qqXiXiY85fqmsQ4Vpko9TdGgrfKY4NddR73mR7v9uuBrlnzucjq85iSVBR7pUQbikxMwWr/moV9PiYzsMi5ivoAQi+3lpSGLQZyIc6NVgY/EenhbvR+mTwHs7fYEyzCb+zIwCtLK3cZ2xpDO+LYPfIqsdxtVkF6Zr++EHkKiR9Jkta2rNEkbBXoL0HcPnMwJtcCIyd8eqePL9PJ4vRGxcnpRcz4DqH2EtrC6hmrNvx4v32Os0fji7xzD4bwhOER3b5LmIvo0VmMbjopHqXHLcZkrszvkrXwC4zrHO0mPnZTyw7iCEGH+1dfuTnYGdLby/2sSP4y2aSbJR7URsl/8xB+fI0eDa0las5vk2pdiY4vrjpU= amr205@amr205-Lenovo-Y50-70"
+    public_key = var.vm_ssh_key
   }
 
   os_disk {
