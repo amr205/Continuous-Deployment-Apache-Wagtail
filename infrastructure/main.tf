@@ -3,7 +3,7 @@ terraform {
     organization = "amr205"
 
     workspaces {
-      name = "AzureDatabaseAdministratorDOA"
+      name = "DP300"
     }
   }
   required_providers {
