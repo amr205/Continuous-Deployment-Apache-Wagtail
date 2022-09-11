@@ -49,6 +49,34 @@ resource "azurerm_subnet" "wagtail-apache" {
 
 }
 
+resource "azurerm_mssql_server" "wagtail-db-server" {
+  name                         = "wagtaildbserver"
+  resource_group_name          = azurerm_resource_group.example.name
+  location                     = azurerm_resource_group.example.location
+  version                      = "12.0"
+  administrator_login          = "4dm1n157r470r"
+  administrator_login_password = "4-v3ry-53cr37-p455w0rd"
+}
+
+resource "azurerm_mssql_database" "wagtail-db" {
+  name           = "wagtaildb"
+  server_id      = azurerm_mssql_server.wagtail-db-server.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  max_size_gb    = 4
+  read_scale     = true
+  sku_name       = "S0"
+  zone_redundant = true
+
+}
+
+resource "azurerm_mssql_firewall_rule" "wagtail-db-server-allowazure" {
+  name             = "FirewallRule1"
+  server_id        = azurerm_mssql_server.wagtail-db-server.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
+
 resource "azurerm_network_interface" "wagtail-apache" {
   name                = "wagtail-apache-nic"
   location            = azurerm_resource_group.wagtail-apache.location
@@ -93,4 +121,3 @@ resource "azurerm_linux_virtual_machine" "wagtail-apache" {
 output "server_ip" {
   value = azurerm_linux_virtual_machine.wagtail-apache.public_ip_address
 }
-
