@@ -3,7 +3,7 @@ terraform {
     organization = "amr205"
 
     workspaces {
-      name = "ApacheWagtail"
+      name = "AzureDatabaseAdministratorDOA"
     }
   }
   required_providers {
